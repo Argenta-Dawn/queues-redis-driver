@@ -174,7 +174,7 @@ extension _QueuesRedisQueue: Queue {
     }
     
     func pop() -> EventLoopFuture<JobIdentifier?> {
-        self.client.rpoplpush(from: RedisKey(self.key), to: RedisKey(self.processingKey)).flatMapThrowing { redisData in
+        self.client.brpoplpush(from: RedisKey(self.key), to: RedisKey(self.processingKey), timeout:.seconds(1)).flatMapThrowing { redisData in
             guard !redisData.isNull else {
                 return nil
             }
