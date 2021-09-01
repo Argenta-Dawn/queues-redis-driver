@@ -16,6 +16,7 @@ let package = Package(
         .package(url: "https://github.com/vapor/vapor.git", from: "4.0.0"),
         .package(url: "https://github.com/vapor/queues.git", from: "1.0.0"),
         .package(url: "https://github.com/vapor/redis.git", from: "4.0.0"),
+        .package(url: "https://github.com/michaeleisel/ZippyJSON.git", from: "1.2.4"),
     ],
     targets: [
         .target(
@@ -24,6 +25,7 @@ let package = Package(
                 .product(name: "Vapor", package: "vapor"),
                 .product(name: "Queues", package: "queues"),
                 .product(name: "Redis", package: "redis"),
+                .product(name: "ZippyJSON", package: "ZippyJSON"),
             ]
         ),
         .testTarget(

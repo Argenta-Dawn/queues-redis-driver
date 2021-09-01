@@ -3,6 +3,7 @@ import Redis
 import NIO
 import Foundation
 import Vapor
+import ZippyJSON
 
 struct InvalidRedisURL: Error {
     let url: String
@@ -199,7 +200,7 @@ extension RedisClient {
     func get<D>(_ key: RedisKey, asJSON type: D.Type) -> EventLoopFuture<D?> where D: Decodable {
         return get(key, as: Data.self).flatMapThrowing { data in
             return try data.flatMap { data in
-                let decoder = JSONDecoder()
+                let decoder = ZippyJSONDecoder()
                 decoder.dateDecodingStrategy = .secondsSince1970
                 return try decoder.decode(D.self, from: data)
             }
