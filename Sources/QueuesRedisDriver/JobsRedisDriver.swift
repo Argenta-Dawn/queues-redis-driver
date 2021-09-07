@@ -159,7 +159,7 @@ extension _QueuesRedisQueue: Queue {
     }
     
     func set(_ id: JobIdentifier, to storage: JobData) -> EventLoopFuture<Void> {
-        self.client.set(RedisKey(id.key), toJSON: storage)
+        self.client.setex(RedisKey(id.key), toJSON: storage, expirationInSeconds: 86400)
     }
     
     func clear(_ id: JobIdentifier) -> EventLoopFuture<Void> {
